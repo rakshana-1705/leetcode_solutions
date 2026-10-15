@@ -1,0 +1,30 @@
+class Solution {
+    public int[] sortArray(int[] nums) {
+        quickSort(nums, 0, nums.length - 1);
+        return nums;
+    }
+
+    private void quickSort(int[] nums, int low, int high) {
+        if (low >= high) return; 
+
+        int pivot = nums[low + (high - low) / 2];
+        int left = low;
+        int right = high;
+
+        while (left <= right) {
+            while (nums[left] < pivot) left++; 
+            while (nums[right] > pivot) right--; 
+            
+            if (left <= right) {
+                int temp = nums[left];
+                nums[left] = nums[right];
+                nums[right] = temp;
+                
+                left++;
+                right--;
+            }
+        }
+        quickSort(nums, low, right);
+        quickSort(nums, left, high);
+    }
+}
